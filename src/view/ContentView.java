@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import ciphers.Cipher;
 import ciphers.ShiftCipher;
 
 public class ContentView extends JPanel {
@@ -27,6 +28,14 @@ public class ContentView extends JPanel {
 	private JLabel lblPlaintextFile, lblCiphertextFile;
 
 	private static final String ROOT_DIR = "E:\\NAM4_HOCKY1\\Antoan&BaoMatHeThong\\workspace\\mid_exam\\saves";
+	private Cipher cipher = new ShiftCipher().setKey(3);;
+	public ContentView setCipher(Cipher cipher) {
+		this.cipher = cipher;
+		return this;
+	}
+	public Cipher getCipher() {
+		return this.cipher;
+	}
 
 	/**
 	 * Create the panel.
@@ -52,11 +61,9 @@ public class ContentView extends JPanel {
 		btnEncrypt.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShiftCipher shiftCipher = new ShiftCipher();
 				String plaintext = plaintextArea.getText();
-				String ciphertext = shiftCipher.shiftEncrypt(plaintext);
+				String ciphertext = cipher.encrypt(plaintext);
 				ciphertextArea.setText(ciphertext);
-				System.out.println(ciphertext);
 			}
 		});
 		btnEncrypt.setBounds(450, 200, 100, 35);
@@ -66,11 +73,9 @@ public class ContentView extends JPanel {
 		btnDecrypt = new JButton("Decrypt");
 		btnDecrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShiftCipher shiftCipher = new ShiftCipher();
 				String ciphertext = ciphertextArea.getText();
-				String plaintext = shiftCipher.shiftDecrypt(ciphertext);
+				String plaintext = cipher.decrypt(ciphertext);
 				plaintextArea.setText(plaintext);
-				System.out.println(plaintext);
 			}
 		});
 		btnDecrypt.setFont(new Font("Tahoma", Font.BOLD, 14));

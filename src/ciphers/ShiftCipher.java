@@ -1,6 +1,6 @@
 package ciphers;
 
-public class ShiftCipher {
+public class ShiftCipher implements Cipher{
 
 	private final char[] ALPHABET = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 			'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
@@ -116,8 +116,19 @@ public class ShiftCipher {
 		return key;
 	}
 
-	public void setKey(int key) {
+	public ShiftCipher setKey(int key) {
 		this.key = key;
+		return this;
+	}
+
+	@Override
+	public String encrypt(String plaintext) {
+		return this.shiftEncrypt(plaintext);
+	}
+
+	@Override
+	public String decrypt(String ciphertext) {
+		return this.shiftDecrypt(ciphertext);
 	}
 
 	
