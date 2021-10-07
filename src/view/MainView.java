@@ -44,7 +44,6 @@ public class MainView {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-//		frame.setLocationRelativeTo(JFrame.);
 		frame.setTitle("Chương trình mã hóa - X");
 		frame.setBounds(100, 100, 1020, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
