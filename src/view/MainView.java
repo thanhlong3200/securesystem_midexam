@@ -43,6 +43,8 @@ public class MainView {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
+//		frame.setLocationRelativeTo(JFrame.);
 		frame.setTitle("Chương trình mã hóa - X");
 		frame.setBounds(100, 100, 1020, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,13 +65,13 @@ public class MainView {
 		
 		JButton btnNewButton_1 = new JButton("<html>Thay<br />th\u1EBF</html>");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton_1.setBounds(108, 10, 100, 50);
+		btnNewButton_1.setBounds(120, 10, 100, 50);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JLabel lblNewLabel = new JLabel("M\u00E3 h\u00F3a d\u1ECBch chuy\u1EC3n");
+		JLabel lblNewLabel = new JLabel("M\u00C3 H\u00D3A D\u1ECACH CHUY\u1EC2N");
 		lblNewLabel.setBounds(10, 60, 986, 32);
 		frame.getContentPane().add(lblNewLabel);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 }

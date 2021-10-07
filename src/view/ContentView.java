@@ -3,8 +3,13 @@ package view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -75,34 +80,30 @@ public class ContentView extends JPanel {
 		lblCiphertext.setBounds(730, 10, 100, 30);
 		add(lblCiphertext);
 		
-		JButton btnPlaintextOpen = new JButton("Open");
-		btnPlaintextOpen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnPlaintextOpen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnPlaintextOpen.setBounds(10, 467, 100, 30);
-		add(btnPlaintextOpen);
 		
+
 		JButton btnCiphertextOpen = new JButton("Open");
 		btnCiphertextOpen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		btnCiphertextOpen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCiphertextOpen.setBounds(570, 467, 100, 30);
+		btnCiphertextOpen.setBounds(780, 467, 100, 30);
 		add(btnCiphertextOpen);
-		
-		JLabel lblPlaintextFile = new JLabel("E://asdfsa//sadfas//abx.txt");
-		lblPlaintextFile.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPlaintextFile.setBounds(10, 439, 420, 30);
+
+		JLabel lblPlaintextFile = new JLabel("");
+		lblPlaintextFile.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPlaintextFile.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblPlaintextFile.setBounds(10, 439, 490, 30);
 		add(lblPlaintextFile);
-		
-		JLabel lblCiphertextFile = new JLabel("E://asdfsa//sadfas//abx.txt");
-		lblCiphertextFile.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCiphertextFile.setBounds(570, 439, 420, 30);
+
+		JLabel lblCiphertextFile = new JLabel("");
+		lblCiphertextFile.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblCiphertextFile.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblCiphertextFile.setBounds(510, 439, 480, 30);
 		add(lblCiphertextFile);
-		
+
 		JButton btnPlaintextSave = new JButton("Save");
 		btnPlaintextSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -111,10 +112,46 @@ public class ContentView extends JPanel {
 		btnPlaintextSave.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnPlaintextSave.setBounds(120, 467, 100, 30);
 		add(btnPlaintextSave);
-		
+
 		JButton btnCiphertextSave = new JButton("Save");
 		btnCiphertextSave.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCiphertextSave.setBounds(680, 467, 100, 30);
+		btnCiphertextSave.setBounds(890, 467, 100, 30);
 		add(btnCiphertextSave);
+
+		JButton btnPlaintextOpen = new JButton("Open");
+		btnPlaintextOpen.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnPlaintextOpen.setBounds(10, 467, 100, 30);
+		add(btnPlaintextOpen);
+		btnPlaintextOpen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser j = new JFileChooser("E:\\NAM4_HOCKY1\\Antoan&BaoMatHeThong\\workspace\\mid_exam\\saves");
+				// Open the save dialog
+				int r = j.showOpenDialog(null);
+				if (r == JFileChooser.APPROVE_OPTION) {
+					System.out.println(j.getSelectedFile().getAbsolutePath());
+
+					File file = j.getSelectedFile();
+					System.out.println("newfile: " + file.getPath());
+
+					String data = readFromInputStream(file);
+					plaintextArea.setText(data);
+					lblPlaintextFile.setText(file.getAbsolutePath());
+				}
+			}
+		});
+
+	}
+
+	private String readFromInputStream(File file) {
+		StringBuilder resultStringBuilder = new StringBuilder();
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				resultStringBuilder.append(line).append("\n");
+			}
+		}catch(IOException e) {
+			return "";
+		}
+		return resultStringBuilder.toString();
 	}
 }
