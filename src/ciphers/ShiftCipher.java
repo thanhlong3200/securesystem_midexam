@@ -1,10 +1,11 @@
 package ciphers;
 
-public class ShiftCipher {
+public class ShiftCipher implements Cipher{
 
 	private final char[] ALPHABET = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 			'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-	private final int CEASAR = 3;
+//	private final int CEASAR = 3;
+	private int key = 3;
 
 	public String shiftEncrypt(String plaintext) {
 		return shift(plaintext, 0);
@@ -58,15 +59,15 @@ public class ShiftCipher {
 			if (typeCrypt == 0) { // encrypt
 				// index more than 23 -> index + CEASAR - 26, else -> 26 - index
 				// sample: index = 24 -> new index = 24 + 3 - 26 = 1
-				newLetter = (alphabetNum < (ALPHABET.length - CEASAR))
-						? ALPHABET[alphabetNum + CEASAR]
-						: ALPHABET[alphabetNum + CEASAR - ALPHABET.length];
+				newLetter = (alphabetNum < (ALPHABET.length - this.key))
+						? ALPHABET[alphabetNum + this.key]
+						: ALPHABET[alphabetNum + this.key - ALPHABET.length];
 			} else { // decrypt
 				// index less than 3 -> 26 + index - 3, else -> index + CEASAR
 				// sample: index = 2 -> new index = 26 + 2 - 3 = 25
-				newLetter = (alphabetNum >= (CEASAR)) 
-						? ALPHABET[alphabetNum - CEASAR]
-						: ALPHABET[ALPHABET.length + alphabetNum - CEASAR];
+				newLetter = (alphabetNum >= (this.key)) 
+						? ALPHABET[alphabetNum - this.key]
+						: ALPHABET[ALPHABET.length + alphabetNum - this.key];
 			}
 		}
 		return upLetter == letter ? newLetter : Character.toLowerCase(newLetter);
@@ -111,4 +112,24 @@ public class ShiftCipher {
 		System.out.println("Decrypt: " + newLetter + " -> " + oldLetter);
 	}
 
+	public int getKey() {
+		return key;
+	}
+
+	public ShiftCipher setKey(int key) {
+		this.key = key;
+		return this;
+	}
+
+	@Override
+	public String encrypt(String plaintext) {
+		return this.shiftEncrypt(plaintext);
+	}
+
+	@Override
+	public String decrypt(String ciphertext) {
+		return this.shiftDecrypt(ciphertext);
+	}
+
+	
 }
