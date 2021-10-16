@@ -28,7 +28,7 @@ public class ContentView extends JPanel {
 	private JLabel lblPlaintextFile, lblCiphertextFile;
 
 	private static final String ROOT_DIR = "E:\\NAM4_HOCKY1\\Antoan&BaoMatHeThong\\workspace\\mid_exam\\saves";
-	private Cipher cipher = new ShiftCipher().setKey(3);;
+	private Cipher cipher = new ShiftCipher().setKey(3);
 	public ContentView setCipher(Cipher cipher) {
 		this.cipher = cipher;
 		return this;
